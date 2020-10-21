@@ -26,6 +26,7 @@ public class AnaliseCreditoService {
 	@Autowired
 	private JmsTemplate jmsTemplate;
 
+	@Autowired
 	private IntegracaoScoreService integracaoScoreService;
 
 	public Long enviarParaAnalise(final PessoaDTO pessoaDTO) {
