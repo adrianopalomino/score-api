@@ -3,8 +3,6 @@ package com.adrianopalomino.scoreapi.dto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import com.adrianopalomino.scoreapi.domain.Pessoa;
-
 public class AnaliseCreditoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -12,7 +10,7 @@ public class AnaliseCreditoDTO implements Serializable {
 	private int score;
 	private BigDecimal resultado;
 
-	public AnaliseCreditoDTO(Pessoa pessoa, int score, BigDecimal resultado) {
+	public AnaliseCreditoDTO(PessoaDTO pessoa, int score, BigDecimal resultado) {
 		this.pessoa = new PessoaDTO(pessoa.getNome(), pessoa.getIdade(), pessoa.getDependentes(), pessoa.getRenda());
 		this.score = score;
 		this.resultado = resultado;
