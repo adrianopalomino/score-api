@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.adrianopalomino.scoreapi.dto.AnaliseCreditoDTO;
 import com.adrianopalomino.scoreapi.dto.PessoaDTO;
 import com.adrianopalomino.scoreapi.services.AnaliseCreditoService;
 
@@ -28,12 +31,20 @@ public class AnaliseCreditoResource {
 	@Autowired
 	private AnaliseCreditoService analiseCreditoService;
 
-	@ApiOperation(value = "Analise de credito")
-	@ApiResponses(value = { @ApiResponse(code = 202, message = "Análise em processamento"), })
+	@ApiOperation(value = "Recurso incluir uma análise de crédito em processamento")
+	@ApiResponses(value = { @ApiResponse(code = 202, message = "Análise em processamento"),
+							@ApiResponse(code = 400, message = "Requisição inválida"), })
 	@PostMapping(value = "/creditos")
 	public ResponseEntity<Void> analisar(@RequestBody PessoaDTO pessoaDTO) throws InterruptedException {
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(analiseCreditoService.analisar(pessoaDTO)).toUri();
+				.buildAndExpand(analiseCreditoService.enviarParaAnalise(pessoaDTO)).toUri();
 		return ResponseEntity.status(HttpStatus.ACCEPTED).header(HttpHeaders.LOCATION, location.toString()).build();
+	}
+
+	@ApiOperation(value = "Recurso para obter uma análise de crédito já processada")
+	@ApiResponses(value = { @ApiResponse(code = 400, message = "Requisição inválida"), })
+	@GetMapping(value = "/creditos/{id}")
+	public ResponseEntity<AnaliseCreditoDTO> recuperarAnalise(@PathVariable Long id) throws InterruptedException {
+		return ResponseEntity.ok().body(analiseCreditoService.recuperarAnalise(id));
 	}
 }

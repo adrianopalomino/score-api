@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.adrianopalomino.scoreapi.domain.AnaliseCredito;
 import com.adrianopalomino.scoreapi.domain.Pessoa;
+import com.adrianopalomino.scoreapi.domain.converters.AnaliseCreditoConverter;
 import com.adrianopalomino.scoreapi.domain.enums.StatusAnalise;
+import com.adrianopalomino.scoreapi.dto.AnaliseCreditoDTO;
 import com.adrianopalomino.scoreapi.dto.PessoaDTO;
+import com.adrianopalomino.scoreapi.exceptions.ObjectNotFoundException;
 import com.adrianopalomino.scoreapi.repositories.AnaliseCreditoRepository;
 
 @Service
@@ -23,7 +26,9 @@ public class AnaliseCreditoService {
 	@Autowired
 	private JmsTemplate jmsTemplate;
 
-	public Long analisar(final PessoaDTO pessoaDTO) {
+	private IntegracaoScoreService integracaoScoreService;
+
+	public Long enviarParaAnalise(final PessoaDTO pessoaDTO) {
 		LOG.info(" ###  Inicio da análise " + pessoaDTO.getCpf());
 
 		final AnaliseCredito analiseCredito = analiseCreditoRepository.save(
@@ -35,6 +40,21 @@ public class AnaliseCreditoService {
 		jmsTemplate.convertAndSend("analisecredito", analiseCredito.getId());
 
 		return analiseCredito.getId();
+	}
+
+	public AnaliseCreditoDTO recuperarAnalise(final Long id) {
+		var analiseCreditoConverter = new AnaliseCreditoConverter();
+		return analiseCreditoConverter
+				.convertFromEntity(analiseCreditoRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException(
+						"Objeto não encontrado! Id: " + id + ", Tipo: " + AnaliseCreditoDTO.class.getName())));
+	}
+
+	public void processarAnaliseScore(final Long id) {
+		var score = integracaoScoreService.recuperarScore(analiseCreditoRepository.findById(id)
+				.orElseThrow(() -> new ObjectNotFoundException(
+						"Objeto não encontrado! Id: " + id + ", Tipo: " + AnaliseCreditoDTO.class.getName()))
+				.getPessoa());
+
 	}
 
 }
