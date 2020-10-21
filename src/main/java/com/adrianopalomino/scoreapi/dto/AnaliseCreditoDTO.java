@@ -11,7 +11,8 @@ public class AnaliseCreditoDTO implements Serializable {
 	private BigDecimal resultado;
 
 	public AnaliseCreditoDTO(PessoaDTO pessoa, int score, BigDecimal resultado) {
-		this.pessoa = new PessoaDTO(pessoa.getNome(), pessoa.getIdade(), pessoa.getDependentes(), pessoa.getRenda());
+		this.pessoa = new PessoaDTO(pessoa.getNome(), pessoa.getIdade(), pessoa.getCpf(), pessoa.getDependentes(),
+				pessoa.getRenda());
 		this.score = score;
 		this.resultado = resultado;
 	}
@@ -38,6 +39,11 @@ public class AnaliseCreditoDTO implements Serializable {
 
 	public void setResultado(BigDecimal resultado) {
 		this.resultado = resultado;
+	}
+
+	@Override
+	public String toString() {
+		return "AnaliseCreditoDTO [pessoa=" + pessoa + ", score=" + score + ", resultado=" + resultado + "]";
 	}
 
 }
