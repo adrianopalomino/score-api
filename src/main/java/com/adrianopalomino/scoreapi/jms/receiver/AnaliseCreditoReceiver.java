@@ -16,9 +16,9 @@ public class AnaliseCreditoReceiver {
 	@Autowired
 	private AnaliseCreditoService analiseCreditoService;
 
-	@JmsListener(destination = "analisecredito", containerFactory = "myFactory")
+	@JmsListener(destination = "analiseCreditoReceiver", containerFactory = "myFactory")
 	public void receiveMessage(Long id) {
-		LOG.info(" ### Mensagem recebida: " + id);
+		LOG.info(" ### Analise de Credito recebida: " + id);
 		analiseCreditoService.processarAnaliseScore(id);
 	}
 

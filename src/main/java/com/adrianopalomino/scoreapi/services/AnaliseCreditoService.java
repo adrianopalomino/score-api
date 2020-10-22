@@ -43,7 +43,7 @@ public class AnaliseCreditoService {
 
 		// apenas o identificador será enviado para a fila para evitar o anti pattern
 		// fat message
-		jmsTemplate.convertAndSend("analisecredito", analiseCredito.getId());
+		jmsTemplate.convertAndSend("analiseCreditoReceiver", analiseCredito.getId());
 
 		return analiseCredito.getId();
 	}
@@ -57,6 +57,7 @@ public class AnaliseCreditoService {
 	}
 
 	public void processarAnaliseScore(final Long id) {
+		LOG.info(" ###  Inicio da processamento da análise de credito: " + id);
 		
 		var analiseCredito = analiseCreditoRepository.findById(id)
 		.orElseThrow(() -> new ObjectNotFoundException(

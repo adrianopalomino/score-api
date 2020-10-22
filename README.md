@@ -2,7 +2,7 @@
 
 Análise de Perfil de Crédito API foi desenvolvida para realizar a análise de crédito de clientes baseado em seu Score.
 
-## Installation
+## Instalação
 
 A versão - Spring - utilizada neste contexto possui de modo nativo suporte para Docker. Portanto, basta executar as instruções descritas abaixo para a construção e execução da imagem, respectivamente:
 
