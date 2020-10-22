@@ -24,26 +24,26 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping(value = "/analises")
-@Api(value = "analises")
+@RequestMapping(value = "/score-api/v1/analises")
+@Api(value = "score-api/v1/analises")
 public class AnaliseCreditoResource {
 
 	@Autowired
 	private AnaliseCreditoService analiseCreditoService;
 
-	@ApiOperation(value = "Recurso incluir uma análise de crédito em processamento")
+	@ApiOperation(value = "Recurso para processar analise de crédito pessoa")
 	@ApiResponses(value = { @ApiResponse(code = 202, message = "Análise em processamento"),
 							@ApiResponse(code = 400, message = "Requisição inválida"), })
-	@PostMapping(value = "/creditos")
+	@PostMapping(value = "/")
 	public ResponseEntity<Void> analisar(@RequestBody PessoaDTO pessoaDTO) throws InterruptedException {
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(analiseCreditoService.enviarParaAnalise(pessoaDTO)).toUri();
 		return ResponseEntity.status(HttpStatus.ACCEPTED).header(HttpHeaders.LOCATION, location.toString()).build();
 	}
 
-	@ApiOperation(value = "Recurso para obter uma análise de crédito já processada")
+	@ApiOperation(value = "Recurso para recuperar análise de crédito pessoa")
 	@ApiResponses(value = { @ApiResponse(code = 400, message = "Requisição inválida"), })
-	@GetMapping(value = "/creditos/{id}")
+	@GetMapping(value = "/{id}")
 	public ResponseEntity<AnaliseCreditoDTO> recuperarAnalise(@PathVariable Long id) throws InterruptedException {
 		return ResponseEntity.ok().body(analiseCreditoService.recuperarAnalise(id));
 	}

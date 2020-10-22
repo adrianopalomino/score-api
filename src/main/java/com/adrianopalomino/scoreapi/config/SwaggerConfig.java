@@ -28,12 +28,13 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 		return new Docket(DocumentationType.SWAGGER_2).select()
 				.apis(RequestHandlerSelectors.basePackage("com.adrianopalomino.scoreapi")).paths(PathSelectors.any())
 				.build().useDefaultResponseMessages(false)
-				.globalResponseMessage(RequestMethod.POST, responseMessageForPOST()).apiInfo(metaData());
+				.globalResponseMessage(RequestMethod.POST, responseMessageForPOST())
+				.globalResponseMessage(RequestMethod.GET, responseMessageForGET()).apiInfo(metaData());
 
 	}
 
 	private ApiInfo metaData() {
-		return new ApiInfoBuilder().title("Spring Boot REST API")
+		return new ApiInfoBuilder().title("Análise de Perfil de Crédito API")
 				.description("\"Spring Boot REST API para análise de crédito\"").version("1.0.0")
 				.license("Apache License Version 2.0").licenseUrl("https://apache.org/licenses/LICENSE-2.0").build();
 	}
@@ -49,6 +50,18 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 		return new ArrayList<ResponseMessage>() {
 			{
 				add(new ResponseMessageBuilder().code(500).message("Erro interno").build());
+				add(new ResponseMessageBuilder().code(403).message("Você não tem permissão para acessar este recurso")
+						.build());
+			}
+		};
+	}
+	
+	private List<ResponseMessage> responseMessageForGET() {
+		return new ArrayList<ResponseMessage>() {
+			{
+				add(new ResponseMessageBuilder().code(500).message("Erro interno").build());
+				add(new ResponseMessageBuilder().code(404).message("Recurso não encontrado")
+						.build());
 				add(new ResponseMessageBuilder().code(403).message("Você não tem permissão para acessar este recurso")
 						.build());
 			}
