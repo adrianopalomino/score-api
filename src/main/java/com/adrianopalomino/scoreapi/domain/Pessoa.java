@@ -87,10 +87,16 @@ public class Pessoa implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		result = prime * result + dependentes;
+		result = prime * result + idade;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
 
+	// criei desta forma para que o TreeMap que irá representar a integração com a
+	// api de score
+	// identifique os objetos baseando-se nas propriedades recebidas pelo objeto
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -100,10 +106,19 @@ public class Pessoa implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Pessoa other = (Pessoa) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (cpf == null) {
+			if (other.cpf != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!cpf.equals(other.cpf))
+			return false;
+		if (dependentes != other.dependentes)
+			return false;
+		if (idade != other.idade)
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
 	}

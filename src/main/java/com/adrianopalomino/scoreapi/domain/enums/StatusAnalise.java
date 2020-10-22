@@ -2,7 +2,7 @@ package com.adrianopalomino.scoreapi.domain.enums;
 
 public enum StatusAnalise {
 
-	PENDENTE(1, "PENDENTE"), FINALIZADO(2, "FINALIZADO");
+	EM_PROCESSAMENTO(1, "EM PROCESSAMENTO"), FINALIZADO(2, "FINALIZADO"), SCORE_INEXISTENTE(3, "SCORE INEXISTENTE");
 
 	private int cod;
 	private String descricao;
