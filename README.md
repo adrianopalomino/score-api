@@ -6,6 +6,7 @@ Essa API foi desenvolvida para simular análises de crédito de pessoas baseado-
 
 - Java (11)
 - Spring boot (2.3.4)
+- Maven 3.x
 - Docker 
 - Docker Compose
 
@@ -25,7 +26,6 @@ Ou então, podemos flexibilizar a construção e execução - Docker - utilizand
 docker-compose up -d
 ```
 
-
 ## Decisões impotantes
 
 Para evitar que o *client* da API aguarde o processamento das informações o contexto JMS - assíncrono - foi inserido na aplicação e, portanto, a solução foi "micro" dividida em etapas.
@@ -36,7 +36,6 @@ Para evitar que o *client* da API aguarde o processamento das informações o co
 
 
 Tudo foi desenvolvido da forma mais simples possível.
-
 
 ## Instruções para testes
 
@@ -127,14 +126,11 @@ Este recurso poderá retornar uma análise de crédito com 3 possíveis status, 
 
 - SCORE INEXISTENTE (para casos em que o score advindo de uma integração externa é inexistente)
 
-
 ## Riscos e mitigações
 
 A aplicação possui mecanismo de mensagens JMS o que pode causar um anti-padrão denominado **Hot Potato**. Para mitigar este problema a aplicação poderá utilizar uma quantidade específica de tentativas de processamento - 10x - e caso as *runtime exceptions* persistam uma outra forma de análise, padrão, poderá ser aplicada.
 
-
 ## Itens abordados na solução
-
 
 ● Design da solução
 ● Síncrono/Assíncrono
