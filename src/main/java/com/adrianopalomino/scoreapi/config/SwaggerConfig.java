@@ -52,6 +52,8 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
 				add(new ResponseMessageBuilder().code(500).message("Erro interno").build());
 				add(new ResponseMessageBuilder().code(403).message("Você não tem permissão para acessar este recurso")
 						.build());
+				add(new ResponseMessageBuilder().code(422).message("Campo  obrigatório não preenchido")
+						.build());
 			}
 		};
 	}
