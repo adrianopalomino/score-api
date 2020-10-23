@@ -23,6 +23,8 @@ docker container run -p 8080:8080 docker.io/library/score-api:0.0.1-SNAPSHOT
 Ou então, podemos flexibilizar a construção e execução - Docker - utilizando os mecanismos de *build* - Dockerfile - e execução - docker-compose, executando a instrução descrita abaixo:
 
 ```bash
+mvn package
+
 docker-compose up -d
 ```
 
