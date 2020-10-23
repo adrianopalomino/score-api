@@ -34,7 +34,7 @@ public class AnaliseCreditoResource {
 	@ApiOperation(value = "Recurso para processar analise de crédito pessoa")
 	@ApiResponses(value = { @ApiResponse(code = 202, message = "Análise em processamento"),
 							@ApiResponse(code = 400, message = "Requisição inválida"), })
-	@PostMapping(value = "/")
+	@PostMapping
 	public ResponseEntity<Void> analisar(@RequestBody PessoaDTO pessoaDTO) throws InterruptedException {
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(analiseCreditoService.enviarParaAnalise(pessoaDTO)).toUri();
