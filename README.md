@@ -55,7 +55,7 @@ Após realizar a instalação e execução da API
 **3.1** - Realize a requisição para o recurso **POST** com um dos objetos descritos abaixo:
 
 
-- Cenário de sucesso:
+- Cenários de sucesso:
 
 {
   "cpf": "92388006007",
@@ -63,6 +63,46 @@ Após realizar a instalação e execução da API
   "idade": 20,
   "nome": "Pedro",
   "renda": 5000.00
+}
+
+{
+  "cpf": "70060842024",
+  "dependentes": 0,
+  "idade": 18,
+  "nome": "João",
+  "renda": 1045.00
+}
+
+{
+  "cpf": "10406392080",
+  "dependentes": 1,
+  "idade": 25,
+  "nome": "José",
+  "renda": 3000.00
+}
+
+{
+  "cpf": "28340240064",
+  "dependentes": 2,
+  "idade": 53,
+  "nome": "Mateus",
+  "renda": 10000.00
+}
+
+{
+  "cpf": "74384183089",
+  "dependentes": 0,
+  "idade": 65,
+  "nome": "Maria",
+  "renda": 2000.00
+}
+
+{
+  "cpf": "76898015010",
+  "dependentes": 1,
+  "idade": 32,
+  "nome": "Fernanda",
+  "renda": 6000.00
 }
 
 - Cenário com falha no processamento:
@@ -74,6 +114,8 @@ Após realizar a instalação e execução da API
   "nome": "Joaquim",
   "renda": 3000.00
 }
+
+
 
 **3.2** - Realize a requisição para o recurso **GET** utilizando o identificador retornado no *Header Location* da requisição **POST**, ou cole a URL disponibilizada em outra aba.
 
@@ -94,7 +136,7 @@ A aplicação possui mecanismo de mensagens JMS o que pode causar um anti-padrã
 ## Itens abordados na solução
 
 
-● Design da solução:
+● Design da solução
 ● Síncrono/Assíncrono
 ● Desempenho
 ● Legibilidade
