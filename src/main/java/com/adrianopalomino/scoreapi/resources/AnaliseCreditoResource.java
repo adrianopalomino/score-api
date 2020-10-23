@@ -2,6 +2,8 @@ package com.adrianopalomino.scoreapi.resources;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -35,7 +37,7 @@ public class AnaliseCreditoResource {
 	@ApiResponses(value = { @ApiResponse(code = 202, message = "Análise em processamento"),
 							@ApiResponse(code = 400, message = "Requisição inválida"), })
 	@PostMapping
-	public ResponseEntity<Void> analisar(@RequestBody PessoaDTO pessoaDTO) throws InterruptedException {
+	public ResponseEntity<Void> analisar(@Valid @RequestBody PessoaDTO pessoaDTO) throws InterruptedException {
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(analiseCreditoService.enviarParaAnalise(pessoaDTO)).toUri();
 		return ResponseEntity.status(HttpStatus.ACCEPTED).header(HttpHeaders.LOCATION, location.toString()).build();
