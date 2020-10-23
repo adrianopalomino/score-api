@@ -51,6 +51,17 @@ public class AnaliseCreditoResourceTest {
 	public void setup() {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
+	
+	@Test
+	public void analisarComErroValidacao() throws Exception {
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		this.mockMvc
+				.perform(post("/score-api/v1/analises/").contentType(MediaType.APPLICATION_JSON)
+						.content(objectMapper.writeValueAsString(new PessoaDTO())))
+				.andDo(print()).andExpect(status().is4xxClientError());
+	}
 
 	@Test
 	public void analisarSucesso() throws Exception {
