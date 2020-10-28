@@ -37,7 +37,7 @@ Para evitar que o *client* da API aguarde o processamento das informações o co
 - Na segunda etapa o *client* da API poderá recuperar a análise de crédito. Essa operação poderá ser executada invocando o recurso **/score-api/v1/analises/{id}** com o verbo HTTP **GET**. A identificação desse recurso será descrita no *Header Location* recuperado na etapa anterior.
 
 
-Tudo foi desenvolvido da forma mais simples possível.
+Tudo foi desenvolvido da forma mais simples possível e para evitar complexidade de testes e utilização não utilizamos mecanismos de [WebSockets](https://www.baeldung.com/spring-security-websockets).
 
 ## Instruções para testes
 
