@@ -18,4 +18,6 @@ steps:
     echo See https://aka.ms/yaml
     pwd
     ls
+    mvn package
+    sudo docker-compose up
   displayName: 'Run a multi-line script'
