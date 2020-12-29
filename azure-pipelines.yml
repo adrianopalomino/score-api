@@ -27,7 +27,7 @@ steps:
 - task: SSH@0
   displayName: 'Run remote docker-compose commands'
   inputs:
-    sshEndpoint: 'Endpoint name redacted'
+    sshEndpoint: 'ubuntu-azr.brazilsouth.cloudapp.azure.com'
     runOptions: inline
     inline: |
      ls
