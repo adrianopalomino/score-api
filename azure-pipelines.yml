@@ -24,13 +24,9 @@ steps:
     testResultsFiles: '**/TEST-*.xml'
     goals: 'package -DskipTests'
 
-- task: DockerCompose@0
-  displayName: Build services
-  inputs:
-    action: Build services
-    azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
-    azureContainerRegistry: $(azureContainerRegistry)
-    dockerComposeFile: docker-compose.yml
-    projectName: $(Build.Repository.Name)
-    qualifyImageNames: true
-    additionalImageTags: $(Build.BuildId)
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+    ls
+    touch newFile.txt
+  displayName: 'Run a multi-line script'
