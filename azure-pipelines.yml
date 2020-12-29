@@ -12,6 +12,7 @@ pool:
 steps:
 - task: SSH@0
   inputs:
+    sshEndpoint: 'ubuntu-azr.brazilsouth.cloudapp.azure.com'
     runOptions: 'commands'
     commands: |
       docker-compose pull
