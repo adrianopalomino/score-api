@@ -34,5 +34,3 @@ steps:
     projectName: $(Build.Repository.Name)
     qualifyImageNames: true
     additionalImageTags: $(Build.BuildId)
-    
-  displayName: 'Run a multi-line script'
