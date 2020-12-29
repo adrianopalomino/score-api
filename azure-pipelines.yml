@@ -10,6 +10,14 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- task: SSH@0
+  inputs:
+    runOptions: 'commands'
+    commands: |
+      docker-compose pull
+      mvn clean install -DskipTests
+      docker-compose up -d
+    readyTimeout: '20000'
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
   
