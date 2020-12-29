@@ -8,27 +8,3 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-
-steps:
-- task: SSH@0
-  inputs:
-    sshEndpoint: 'ubuntu-azr.brazilsouth.cloudapp.azure.com'
-    runOptions: 'commands'
-    commands: |
-      docker-compose pull
-      mvn clean install -DskipTests
-      docker-compose up -d
-    readyTimeout: '20000'
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-  
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: false
-    testResultsFiles: '**/TEST-*.xml'
-    goals: 'package -DskipTests'
